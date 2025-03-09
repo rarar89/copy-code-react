@@ -9,7 +9,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   plugins: [
     react(),
-    dts({ include: ['src'] })
+    dts({ 
+      include: ['src'],
+      tsconfigPath: './tsconfig.app.json'
+    })
   ],
   build: {
     lib: {

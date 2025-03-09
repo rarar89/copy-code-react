@@ -169,7 +169,7 @@ function Counter() {
               overflow: 'auto'
             }}>
               <code>
-                {`// This code block will flash when copied (bottom-left position)
+                {`// This code block will flash when copied
 const colors = {
   primary: '#5a25eb',
   secondary: '#10b981',
