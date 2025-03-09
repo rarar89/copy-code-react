@@ -17,8 +17,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'ReactCodeCopy',
-      fileName: 'react-code-copy'
+      name: 'CopyCodeReact',
+      fileName: 'copy-code-react'
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
