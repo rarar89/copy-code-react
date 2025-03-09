@@ -9,8 +9,18 @@ A lightweight React library that automatically adds copy buttons to code blocks.
 
 ## Installation
 
+Install using pnpm, npm or yarn
+
+```bash
+pnpm install code-copy-react
+```
+
 ```bash
 npm install code-copy-react
+```
+
+```bash
+yarn add code-copy-react
 ```
 
 ## Usage
@@ -39,6 +49,20 @@ function MyComponent() {
   );
 }
 
+```
+
+CopyCode component also works with dangerouslySetInnerHTML:
+
+```tsx
+import { CopyCode } from 'code-copy-react';
+
+function MyComponent() {
+  return (
+    <CopyCode>
+      <div dangerouslySetInnerHTML={{ __html: '<pre><code>console.log("Hello, world!");</code></pre>' }} />
+    </CopyCode>
+  );
+}
 ```
 
 You can also customize the appearance and behavior of the copy buttons:
