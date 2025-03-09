@@ -1,17 +1,17 @@
-import React, { ReactNode, useRef } from 'react';
-import { CodeBlockCopyOptions } from '../types/codeCopy';
-import { useCodeCopy } from '../hooks/useCodeCopy';
+import { ReactNode, useRef } from 'react';
+import { CopyCodeOptions } from '../types/CopyCodeOptions';
+import { useCodeCopy } from '../hooks/useCopyCode';
 
-export interface CodeCopyWrapperProps extends CodeBlockCopyOptions {
+export interface CopyCodeWrapperProps extends CopyCodeOptions {
   children: ReactNode;
   className?: string;
 }
 
-export const CodeCopyWrapper = ({
+export const CopyCode = ({
   children, 
   className = '',
   ...options
-}: CodeCopyWrapperProps) => {
+}: CopyCodeWrapperProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   
   // Use the hook with the ref

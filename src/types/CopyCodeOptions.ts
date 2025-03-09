@@ -1,4 +1,4 @@
-export interface CodeBlockCopyOptions {
+export interface CopyCodeOptions {
   /** CSS selector for code blocks */
   selector?: string;
   /** Position of the copy button */
@@ -15,6 +15,4 @@ export interface CodeBlockCopyOptions {
   successClassName?: string;
   /** Whether to highlight the code block when copied */
   highlightOnCopy?: boolean;
-  /** Whether to include line numbers in copied text */
-  includeLineNumbers?: boolean;
 }

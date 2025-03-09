@@ -1,3 +1,3 @@
-export { useCodeCopy } from './hooks/useCodeCopy';
-export type { CodeBlockCopyOptions } from './types/codeCopy';
-export { CodeCopyWrapper } from './components/CodeCopyWrapper';
+export { useCodeCopy } from './hooks/useCopyCode';
+export type { CopyCodeOptions } from './types/CopyCodeOptions';
+export { CopyCode } from './components/CopyCode';

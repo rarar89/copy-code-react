@@ -1,5 +1,7 @@
 import { useEffect, RefObject } from 'react';
-import { CodeBlockCopyOptions } from '../types/codeCopy';
+import { CopyCodeOptions } from '../types/CopyCodeOptions';
+import { CopyIcon } from '../icons/CopyIcon';
+import { CheckIcon } from '../icons/CheckIcon';
 
 // Position classes mapping with standalone CSS (no Tailwind)
 const positionClasses = {
@@ -10,7 +12,7 @@ const positionClasses = {
 };
 
 export const useCodeCopy = (
-  options: CodeBlockCopyOptions,
+  options: CopyCodeOptions,
   ref?: RefObject<HTMLElement | null>
 ) => {
   const {
@@ -22,7 +24,6 @@ export const useCodeCopy = (
     buttonClassName = 'react-code-copy-button',
     successClassName = 'react-code-copy-success',
     highlightOnCopy = false,
-    includeLineNumbers = false,
   } = options;
 
   useEffect(() => {
@@ -69,20 +70,28 @@ export const useCodeCopy = (
           align-items: center;
           justify-content: center;
           padding: 8px;
-          background-color: rgba(200, 200, 200, 0.2);
+          background-color: rgb(50,58,80);
+          border: 1px solid rgb(79,84,104);
           border-radius: 4px;
-          border: none;
           cursor: pointer;
-          transition: background-color 0.3s ease;
+          transition: all 0.2s ease;
           pointer-events: auto;
+          color: currentColor;
+          opacity: 0.8;
         }
         
         .react-code-copy-button:hover {
-          background-color: rgba(200, 200, 200, 0.4);
+          background-color: rgb(79,84,104);
+          border-color: rgb(86,90,105);
+          opacity: 1;
+        }
+        
+        .react-code-copy-button:focus {
+          outline: none;
         }
         
         .react-code-copy-success {
-          color: #10b981;
+          color:rgb(30, 218, 155);
         }
         
         @keyframes react-code-copy-fade-in {
@@ -115,11 +124,10 @@ export const useCodeCopy = (
     const cleanupFunctions: (() => void)[] = [];
 
     // Add copy button to each code block
-    codeBlocks.forEach((codeBlock, index) => {
+    codeBlocks.forEach((codeBlock) => {
       // Skip if code block already has a copy button
       const parentPre = codeBlock.parentElement;
       if (!parentPre || parentPre.tagName !== 'PRE' || parentPre.querySelector('.react-code-copy-button')) {
-        console.log(`Skipping code block ${index}: no parent pre or already has button`);
         return;
       }
       
@@ -134,31 +142,16 @@ export const useCodeCopy = (
       const copyButton = document.createElement('button');
       copyButton.className = `${buttonClassName}`;
       copyButton.setAttribute('aria-label', 'Copy code');
-      copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-        </svg>`;
+      copyButton.innerHTML = CopyIcon;
 
       // Click handler to copy code
       const clickHandler = (e: Event) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Copy button clicked!');
         
         let code = codeBlock.textContent || '';
         
-        // If we don't want line numbers, remove them
-        if (!includeLineNumbers) {
-          // This assumes line numbers are in a span with a class like 'line-number'
-          const tempEl = document.createElement('div');
-          tempEl.innerHTML = codeBlock.innerHTML;
-          const lineNumbers = tempEl.querySelectorAll('.line-number');
-          lineNumbers.forEach(el => el.remove());
-          code = tempEl.textContent || '';
-        }
-        
         navigator.clipboard.writeText(code).then(() => {
-          console.log('Code copied to clipboard');
           // Highlight the code block if requested
           if (highlightOnCopy && parentPre) {
             parentPre.classList.add('react-code-copy-highlight');
@@ -170,28 +163,19 @@ export const useCodeCopy = (
           // Change button to show success with green check icon
           copyButton.innerHTML = `<div class="react-code-copy-flex react-code-copy-fade-in">
               <div class="${successClassName}">${copyMessage}</div>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 6 9 17l-5-5"/>
-                </svg>
+              ${CheckIcon}
             </div>`;
 
           // Reset button after the timeout
           setTimeout(() => {
-            copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="react-code-copy-fade-in">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-              </svg>`;
+            copyButton.innerHTML = CopyIcon;
           }, copyMessageTimeout);
         }).catch(error => {
           console.error('Failed to copy code:', error);
           copyButton.innerHTML = `<div class="react-code-copy-fade-in" style="color: #ef4444;">Failed to copy!</div>`;
           
           setTimeout(() => {
-            copyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="react-code-copy-fade-in">
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-              </svg>
-            `;
+            copyButton.innerHTML = CopyIcon;
           }, copyMessageTimeout);
         });
       };
@@ -229,7 +213,6 @@ export const useCodeCopy = (
     containerClassName,
     successClassName,
     highlightOnCopy,
-    includeLineNumbers,
     ref
   ]);
 }; 

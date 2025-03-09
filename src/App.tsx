@@ -1,16 +1,7 @@
-import React from 'react';
-import { CodeCopyWrapper } from './index';
+import { CopyCode } from ".";
+
 
 function App() {
-/*
-  useCodeBlockCopy({
-    selector: 'pre code',
-    position: 'top-right',
-    copyMessage: 'Copied!',
-    highlightOnCopy: true,
-  });*/
-
-  console.log('render');
 
   return (
     <div className="App" style={{
@@ -37,10 +28,7 @@ function App() {
         <h2 style={{ color: '#4b5563' }}>Using CodeCopyWrapper</h2>
         <p>This component adds copy buttons to all code blocks within it.</p>
         
-        <CodeCopyWrapper
-          position="top-right"
-          copyMessage="Copied!"
-        >
+        <CopyCode>
           <div style={{ 
             background: '#f9fafb', 
             padding: '1.5rem 0', 
@@ -79,7 +67,7 @@ function App() {
               </code>
             </pre>
           </div>
-        </CodeCopyWrapper>
+        </CopyCode>
       </section>
       
       <section>
