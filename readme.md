@@ -1,6 +1,8 @@
 # Code Copy React
 
-![Copy Code Demo](https://github.com/rarar89/copy-code-react/blob/main/images/copy-code-block.gif?raw=true)
+<p align="center">
+  <img src="https://github.com/rarar89/copy-code-react/blob/main/images/copy-code-block.gif?raw=true" alt="Copy Code Demo" />
+</p>
 
 A lightweight React library that automatically adds copy buttons to code blocks. Pass custom css classes to customize the button.
 
@@ -101,9 +103,6 @@ Without a ref, the hook will apply to all code blocks in the document:
 import { useCodeCopy } from 'code-copy-react';
 
 function MyComponent() {
-  useCodeCopy({import { useCodeCopy } from 'code-copy-react';
-
-function MyComponent() {
   // Add copy buttons to all code blocks in the document
   useCodeCopy({ 
     selector: 'code',
@@ -130,6 +129,40 @@ Both the CopyCode component and useCodeCopy hook accept the following options:
 | buttonClassName | string | 'react-code-copy-button' | Class name for the copy button |
 | successClassName | string | 'react-code-copy-success' | Class name for success message |
 | highlightOnCopy | boolean | false | Whether to highlight the code block when copied |
+
+## Development
+
+### Running the Demo
+
+To see the library in action and explore example implementations:
+
+```bash
+# Clone the repository
+git clone https://github.com/rarar89/copy-code-react.git
+cd copy-code-react
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The development server will start, and you can view the examples at `http://localhost:5173` (or the port shown in your terminal).
+
+### Example Implementations
+
+The repository includes several example implementations in the demo app (`src/App.tsx`). These examples showcase different configurations and use cases for the library.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
