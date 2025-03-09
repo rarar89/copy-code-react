@@ -1,0 +1,10 @@
+src/
+.github/
+.vscode/
+node_modules/
+.gitignore
+.eslintrc*
+prettier.config.js
+tsconfig*.json
+vite.config.ts
+*.log

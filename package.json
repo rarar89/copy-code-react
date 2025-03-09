@@ -1,17 +1,25 @@
 {
-  "name": "react-copy-code",
-  "version": "1.0.0",
+  "name": "copy-code-react",
+  "version": "0.5.0",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/react-copy-code.umd.js",
-  "module": "./dist/react-copy-code.js",
+  "main": "./dist/copy-code-react.umd.js",
+  "module": "./dist/copy-code-react.js",
   "types": "./dist/index.d.ts",
+  "keywords": [
+    "react",
+    "copy",
+    "code",
+    "clipboard",
+    "syntax",
+    "highlight"
+  ],
   "exports": {
     ".": {
-      "import": "./dist/react-copy-code.js",
-      "require": "./dist/react-copy-code.umd.js"
+      "import": "./dist/copy-code-react.js",
+      "require": "./dist/copy-code-react.umd.js"
     }
   },
   "scripts": {

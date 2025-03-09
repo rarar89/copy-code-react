@@ -104,8 +104,9 @@ export const useCodeCopy = (
         }
         
         .react-code-copy-highlight {
-          transition: background-color 0.3s ease;
-          background-color: rgba(80, 80, 80, 0.2) !important;
+          transition: filter 0.15s ease-in-out;
+          -webkit-filter: invert(80%);
+          filter: invert(80%);
         }
         
         .react-code-copy-flex {
@@ -127,7 +128,7 @@ export const useCodeCopy = (
     codeBlocks.forEach((codeBlock) => {
       // Skip if code block already has a copy button
       const parentPre = codeBlock.parentElement;
-      if (!parentPre || parentPre.tagName !== 'PRE' || parentPre.querySelector('.react-code-copy-button')) {
+      if (!parentPre || parentPre.tagName !== 'PRE' || parentPre.querySelector('.react-code-copy-button-element')) {
         return;
       }
       
@@ -136,11 +137,11 @@ export const useCodeCopy = (
 
       // Create container for the button
       const buttonContainer = document.createElement('div');
-      buttonContainer.className = `${containerClassName} ${positionClasses[position]}`;
+      buttonContainer.className = `${containerClassName} ${positionClasses[position]} react-code-copy-button-container-element`;
 
       // Create the copy button
       const copyButton = document.createElement('button');
-      copyButton.className = `${buttonClassName}`;
+      copyButton.className = `${buttonClassName} react-code-copy-button-element`;
       copyButton.setAttribute('aria-label', 'Copy code');
       copyButton.innerHTML = CopyIcon;
 
@@ -157,12 +158,12 @@ export const useCodeCopy = (
             parentPre.classList.add('react-code-copy-highlight');
             setTimeout(() => {
               parentPre.classList.remove('react-code-copy-highlight');
-            }, copyMessageTimeout);
+            }, 400);
           }
 
           // Change button to show success with green check icon
           copyButton.innerHTML = `<div class="react-code-copy-flex react-code-copy-fade-in">
-              <div class="${successClassName}">${copyMessage}</div>
+              ${copyMessage ? `<div class="${successClassName}">${copyMessage}</div>` : ''}
               ${CheckIcon}
             </div>`;
 
@@ -197,7 +198,7 @@ export const useCodeCopy = (
       codeBlocks.forEach(codeBlock => {
         const parentPre = codeBlock.parentElement;
         if (parentPre) {
-          const buttonContainer = parentPre.querySelector(`.${containerClassName}`);
+          const buttonContainer = parentPre.querySelector(`.react-code-copy-button-container`);
           if (buttonContainer) {
             parentPre.removeChild(buttonContainer);
           }

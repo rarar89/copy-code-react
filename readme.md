@@ -1,7 +1,7 @@
-# Code Copy React
+# Copy Code React
 
 <p align="center">
-  <img src="https://github.com/rarar89/copy-code-react/blob/main/images/copy-code-block.gif?raw=true" alt="Copy Code Demo" />
+  <img src="https://github.com/rarar89/copy-code-react/blob/main/images/copy-code-block.gif?raw=true" alt="Copy Code Demo" style="max-width: 500px; width: 100%;" />
 </p>
 
 A lightweight React library that automatically adds copy buttons to code blocks. Pass custom css classes to customize the button.
