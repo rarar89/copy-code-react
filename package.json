@@ -10,6 +10,7 @@
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
   "author": "rarar89",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/rarar89/copy-code-react"
