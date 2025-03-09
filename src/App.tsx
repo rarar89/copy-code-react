@@ -1,6 +1,5 @@
 import { CopyCode } from ".";
 
-
 function App() {
 
   return (

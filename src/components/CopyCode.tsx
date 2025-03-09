@@ -1,25 +1,22 @@
+'use client';
+
 import { ReactNode, useRef } from 'react';
 import { CopyCodeOptions } from '../types/CopyCodeOptions';
-import { useCodeCopy } from '../hooks/useCopyCode';
+import { useCopyCode } from '../hooks/useCopyCode';
 
 export interface CopyCodeWrapperProps extends CopyCodeOptions {
   children: ReactNode;
   className?: string;
 }
 
-export const CopyCode = ({
-  children, 
-  className = '',
-  ...options
-}: CopyCodeWrapperProps) => {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+export function CopyCode({ children, className = '', ...options }: CopyCodeWrapperProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   
-  // Use the hook with the ref
-  useCodeCopy(options, wrapperRef);
+  useCopyCode(options, containerRef);
   
   return (
-    <div ref={wrapperRef} className={`react-code-copy-wrapper ${className}`}>
+    <div ref={containerRef} className={className}>
       {children}
     </div>
   );
-}; 
+} 

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, RefObject } from 'react';
 import { CopyCodeOptions } from '../types/CopyCodeOptions';
 import { CopyIcon } from '../icons/CopyIcon';
@@ -11,7 +13,7 @@ const positionClasses = {
   'bottom-left': 'react-code-copy-position-bl',
 };
 
-export const useCodeCopy = (
+export const useCopyCode = (
   options: CopyCodeOptions,
   ref?: RefObject<HTMLElement | null>
 ) => {
@@ -26,7 +28,14 @@ export const useCodeCopy = (
     highlightOnCopy = false,
   } = options;
 
+  // Skip execution during SSR
+  if (typeof window === 'undefined') {
+    useEffect(() => {}, []);
+    return;
+  }
+
   useEffect(() => {
+
     // Use document as root element if no ref is provided
     const rootElement = ref?.current || document;
 
@@ -162,8 +171,8 @@ export const useCodeCopy = (
           }
 
           // Change button to show success with green check icon
-          copyButton.innerHTML = `<div class="react-code-copy-flex react-code-copy-fade-in">
-              ${copyMessage ? `<div class="${successClassName}">${copyMessage}</div>` : ''}
+          copyButton.innerHTML = `<div class="${successClassName} react-code-copy-flex react-code-copy-fade-in">
+              ${copyMessage ? `<div>${copyMessage}</div>` : ''}
               ${CheckIcon}
             </div>`;
 

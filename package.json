@@ -1,6 +1,6 @@
 {
   "name": "copy-code-react",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "type": "module",
   "files": [
     "dist"
@@ -8,6 +8,7 @@
   "main": "./dist/copy-code-react.umd.js",
   "module": "./dist/copy-code-react.js",
   "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
   "keywords": [
     "react",
     "copy",
@@ -51,6 +52,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "prettier": "^3.5.3",
+    "rollup-plugin-preserve-use-client": "^3.0.1",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
