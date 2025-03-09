@@ -9,6 +9,11 @@
   "module": "./dist/copy-code-react.js",
   "types": "./dist/index.d.ts",
   "source": "./src/index.ts",
+  "author": "rarar89",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rarar89/copy-code-react"
+  },
   "keywords": [
     "react",
     "copy",
