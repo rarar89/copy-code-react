@@ -1,11 +1,13 @@
-# React Code Copy
+# Code Copy React
 
-A lightweight React library that automatically adds copy buttons to code blocks.
+A lightweight React library that automatically adds copy buttons to code blocks. Pass custom css styles to customize the button.
+
+![Copy Code Demo](https://github.com/rarar89/copy-code-react/blob/main/images/copy-code-block.gif?raw=true)
 
 ## Installation
 
 ```bash
-npm install react-code-copy
+npm install code-copy-react
 ```
 
 ## Usage
