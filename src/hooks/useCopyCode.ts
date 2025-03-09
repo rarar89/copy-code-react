@@ -7,10 +7,10 @@ import { CheckIcon } from '../icons/CheckIcon';
 
 // Position classes mapping with standalone CSS (no Tailwind)
 const positionClasses = {
-  'top-right': 'react-code-copy-position-tr',
-  'top-left': 'react-code-copy-position-tl',
-  'bottom-right': 'react-code-copy-position-br',
-  'bottom-left': 'react-code-copy-position-bl',
+  'top-right': 'copy-code-react-position-tr',
+  'top-left': 'copy-code-react-position-tl',
+  'bottom-right': 'copy-code-react-position-br',
+  'bottom-left': 'copy-code-react-position-bl',
 };
 
 export const useCopyCode = (
@@ -22,9 +22,9 @@ export const useCopyCode = (
     position = 'top-right',
     copyMessage = 'Copied',
     copyMessageTimeout = 2000,
-    containerClassName = 'react-code-copy-button-container',
-    buttonClassName = 'react-code-copy-button',
-    successClassName = 'react-code-copy-success',
+    containerClassName = 'copy-code-react-button-container',
+    buttonClassName = 'copy-code-react-button',
+    successClassName = 'copy-code-react-success',
     highlightOnCopy = false,
   } = options;
 
@@ -41,40 +41,40 @@ export const useCopyCode = (
 
     // CSS for custom animations and positioning
     const style = document.createElement('style');
-    if (!document.head.querySelector('#react-code-copy-styles')) {
-      style.id = 'react-code-copy-styles';
+    if (!document.head.querySelector('#copy-code-react-styles')) {
+      style.id = 'copy-code-react-styles';
       style.textContent = `
-        .react-code-copy-wrapper pre {
+        .copy-code-react-wrapper pre {
           position: relative;
         }
         
-        .react-code-copy-button-container {
+        .copy-code-react-button-container {
           position: absolute;
           z-index: 100;
           pointer-events: auto;
         }
         
-        .react-code-copy-position-tr {
+        .copy-code-react-position-tr {
           top: 8px;
           right: 8px;
         }
         
-        .react-code-copy-position-tl {
+        .copy-code-react-position-tl {
           top: 8px;
           left: 8px;
         }
         
-        .react-code-copy-position-br {
+        .copy-code-react-position-br {
           bottom: 8px;
           right: 8px;
         }
         
-        .react-code-copy-position-bl {
+        .copy-code-react-position-bl {
           bottom: 8px;
           left: 8px;
         }
         
-        .react-code-copy-button {
+        .copy-code-react-button {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -89,36 +89,36 @@ export const useCopyCode = (
           opacity: 0.8;
         }
         
-        .react-code-copy-button:hover {
+        .copy-code-react-button:hover {
           background-color: rgb(79,84,104);
           border-color: rgb(86,90,105);
           opacity: 1;
         }
         
-        .react-code-copy-button:focus {
+        .copy-code-react-button:focus {
           outline: none;
         }
         
-        .react-code-copy-success {
+        .copy-code-react-success {
           color:rgb(30, 218, 155);
         }
         
-        @keyframes react-code-copy-fade-in {
+        @keyframes copy-code-react-fade-in {
           from { opacity: 0; }
           to { opacity: 1; }
         }
         
-        .react-code-copy-fade-in {
-          animation: react-code-copy-fade-in 0.5s ease-in-out;
+        .copy-code-react-fade-in {
+          animation: copy-code-react-fade-in 0.5s ease-in-out;
         }
         
-        .react-code-copy-highlight {
+        .copy-code-react-highlight {
           transition: filter 0.15s ease-in-out;
           -webkit-filter: invert(80%);
           filter: invert(80%);
         }
         
-        .react-code-copy-flex {
+        .copy-code-react-flex {
           display: flex;
           align-items: center;
           gap: 4px;
@@ -137,7 +137,7 @@ export const useCopyCode = (
     codeBlocks.forEach((codeBlock) => {
       // Skip if code block already has a copy button
       const parentPre = codeBlock.parentElement;
-      if (!parentPre || parentPre.tagName !== 'PRE' || parentPre.querySelector('.react-code-copy-button-element')) {
+      if (!parentPre || parentPre.tagName !== 'PRE' || parentPre.querySelector('.copy-code-react-button-element')) {
         return;
       }
       
@@ -146,11 +146,11 @@ export const useCopyCode = (
 
       // Create container for the button
       const buttonContainer = document.createElement('div');
-      buttonContainer.className = `${containerClassName} ${positionClasses[position]} react-code-copy-button-container-element`;
+      buttonContainer.className = `${containerClassName} ${positionClasses[position]} copy-code-react-button-container-element`;
 
       // Create the copy button
       const copyButton = document.createElement('button');
-      copyButton.className = `${buttonClassName} react-code-copy-button-element`;
+      copyButton.className = `${buttonClassName} copy-code-react-button-element`;
       copyButton.setAttribute('aria-label', 'Copy code');
       copyButton.innerHTML = CopyIcon;
 
@@ -164,14 +164,14 @@ export const useCopyCode = (
         navigator.clipboard.writeText(code).then(() => {
           // Highlight the code block if requested
           if (highlightOnCopy && parentPre) {
-            parentPre.classList.add('react-code-copy-highlight');
+            parentPre.classList.add('copy-code-react-highlight');
             setTimeout(() => {
-              parentPre.classList.remove('react-code-copy-highlight');
+              parentPre.classList.remove('copy-code-react-highlight');
             }, 400);
           }
 
           // Change button to show success with green check icon
-          copyButton.innerHTML = `<div class="${successClassName} react-code-copy-flex react-code-copy-fade-in">
+          copyButton.innerHTML = `<div class="${successClassName} copy-code-react-flex copy-code-react-fade-in">
               ${copyMessage ? `<div>${copyMessage}</div>` : ''}
               ${CheckIcon}
             </div>`;
@@ -182,7 +182,7 @@ export const useCopyCode = (
           }, copyMessageTimeout);
         }).catch(error => {
           console.error('Failed to copy code:', error);
-          copyButton.innerHTML = `<div class="react-code-copy-fade-in" style="color: #ef4444;">Failed to copy!</div>`;
+          copyButton.innerHTML = `<div class="copy-code-react-fade-in" style="color: #ef4444;">Failed to copy!</div>`;
           
           setTimeout(() => {
             copyButton.innerHTML = CopyIcon;
@@ -207,7 +207,7 @@ export const useCopyCode = (
       codeBlocks.forEach(codeBlock => {
         const parentPre = codeBlock.parentElement;
         if (parentPre) {
-          const buttonContainer = parentPre.querySelector(`.react-code-copy-button-container`);
+          const buttonContainer = parentPre.querySelector(`.copy-code-react-button-container`);
           if (buttonContainer) {
             parentPre.removeChild(buttonContainer);
           }
