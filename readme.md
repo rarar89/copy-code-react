@@ -100,7 +100,7 @@ function MyComponent() {
   useCodeCopy(
     { 
       position: 'top-left',
-      copyMessage: 'Copied!',
+      copyMessage: 'Code Copied!',
       highlightOnCopy: true 
     }, 
     containerRef
