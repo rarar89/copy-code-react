@@ -18,8 +18,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/copy-code-react.js",
-      "require": "./dist/copy-code-react.umd.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/copy-code-react.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/copy-code-react.umd.js"
+      }
     }
   },
   "scripts": {
