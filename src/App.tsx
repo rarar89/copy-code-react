@@ -197,6 +197,10 @@ export default colors;`}
               border-radius: 12px;
               background-color:rgb(182, 53, 147);
             }
+            .custom-button:hover {
+              border-radius: 12px;
+              background-color:rgb(215, 72, 177);
+            }
             .custom-success {
               color:rgb(240, 235, 255);
               font-size: 14px;
