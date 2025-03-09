@@ -11,15 +11,15 @@ A lightweight React library that automatically adds copy buttons to code blocks.
 Install using pnpm, npm or yarn
 
 ```bash
-pnpm install code-copy-react
+pnpm install copy-code-react
 ```
 
 ```bash
-npm install code-copy-react
+npm install copy-code-react
 ```
 
 ```bash
-yarn add code-copy-react
+yarn add copy-code-react
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ yarn add code-copy-react
 The CopyCode component automatically adds copy buttons to all code blocks within it. This is the simplest way to add copy functionality to specific sections of your app.
 
 ```tsx
-import { CopyCode } from 'code-copy-react';
+import { CopyCode } from 'copy-code-react';
 
 function MyComponent() {
   return (
@@ -53,7 +53,7 @@ function MyComponent() {
 CopyCode component also works with dangerouslySetInnerHTML:
 
 ```tsx
-import { CopyCode } from 'code-copy-react';
+import { CopyCode } from 'copy-code-react';
 
 function MyComponent() {
   return (
@@ -67,7 +67,7 @@ function MyComponent() {
 You can also customize the appearance and behavior of the copy buttons:
 
 ```tsx
-import { CopyCode } from 'code-copy-react';
+import { CopyCode } from 'copy-code-react';
 
 function MyComponent() {
   return (
@@ -88,7 +88,7 @@ For more control, you can use the useCodeCopy hook directly in your components. 
 
 ```tsx
 
-import { useCodeCopy } from 'code-copy-react';
+import { useCodeCopy } from 'copy-code-react';
 import { useRef } from 'react';
 
 function MyComponent() {
@@ -123,7 +123,7 @@ function example() {
 Without a ref, the hook will apply to all code blocks in the document:
 
 ```tsx
-import { useCodeCopy } from 'code-copy-react';
+import { useCodeCopy } from 'copy-code-react';
 
 function MyComponent() {
   // Add copy buttons to all code blocks in the document
