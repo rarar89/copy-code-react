@@ -209,9 +209,9 @@ export default colors;`}
           `}
         </style>
         <CopyCode 
-          containerClassName="react-code-copy-button-container custom-container"
-          buttonClassName="react-code-copy-button custom-button"
-          successClassName="react-code-copy-success custom-success"
+          containerClassName="copy-code-react-button-container custom-container"
+          buttonClassName="copy-code-react-button custom-button"
+          successClassName="copy-code-react-success custom-success"
         >
           <div style={{ 
             background: '#f9fafb', 
