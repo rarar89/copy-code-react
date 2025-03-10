@@ -93,11 +93,11 @@ function MyComponent() {
 
 ### Method 2: Using the Hook Directly
 
-For more control, you can use the useCodeCopy hook directly in your components. This allows you to target specific sections of your app.
+For more control, you can use the useCopyCode hook directly in your components. This allows you to target specific sections of your app.
 
 ```tsx
 
-import { useCodeCopy } from 'copy-code-react';
+import { useCopyCode } from 'copy-code-react';
 import { useRef } from 'react';
 
 function MyComponent() {
@@ -105,7 +105,7 @@ function MyComponent() {
   const containerRef = useRef(null);
   
   // Apply the hook with custom options
-  useCodeCopy(
+  useCopyCode(
     { 
       position: 'top-left',
       copyMessage: 'Code Copied!',
@@ -132,11 +132,11 @@ function example() {
 Without a ref, the hook will apply to all code blocks in the document:
 
 ```tsx
-import { useCodeCopy } from 'copy-code-react';
+import { useCopyCode } from 'copy-code-react';
 
 function MyComponent() {
   // Add copy buttons to all code blocks in the document
-  useCodeCopy({ 
+  useCopyCode({ 
     selector: 'code',
   });
   
