@@ -15,4 +15,8 @@ export interface CopyCodeOptions {
   successClassName?: string;
   /** Whether to highlight the code block when copied */
   highlightOnCopy?: boolean;
+  /** Custom JSX element to use instead of the default copy icon */
+  customCopyIcon?: React.ReactNode;
+  /** Custom JSX element to use instead of the default success icon */
+  customSuccessIcon?: React.ReactNode;
 }

@@ -1,6 +1,40 @@
 import { CopyCode } from ".";
 
 function App() {
+  // Custom JSX icons for the demo
+  const CustomCopyIcon = () => (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+    >
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+  );
+
+  const CustomSuccessIcon = () => (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="#10b981" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+    >
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+  );
 
   return (
     <div className="App" style={{
@@ -266,6 +300,55 @@ function Example() {
           </code>
         </pre>
         </div>
+      </section>
+      
+      <section style={{ marginBottom: '3rem' }}>
+        <h2 style={{ color: '#4b5563' }}>Custom Icons</h2>
+        <p>Use your own custom React components for the copy and success icons.</p>
+        
+        <CopyCode 
+          customCopyIcon={<CustomCopyIcon />}
+          customSuccessIcon={<CustomSuccessIcon />}
+          copyMessage="Custom icons!"
+        >
+          <div style={{ 
+            background: '#f9fafb', 
+            padding: '1.5rem 0', 
+            borderRadius: '8px',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+          }}>
+            <pre style={{ 
+              background: '#1e293b', 
+              color: '#e2e8f0',
+              padding: '1rem',
+              borderRadius: '6px',
+              overflow: 'auto'
+            }}>
+              <code>
+                {`// Using custom React components as icons
+import { CopyCode } from 'copy-code-react';
+
+function MyComponent() {
+  const CustomCopyIcon = () => (
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+    </svg>
+  );
+
+  return (
+    <CopyCode 
+      customCopyIcon={<CustomCopyIcon />}
+      customSuccessIcon={<CheckCircleIcon />}
+    >
+      <pre><code>{code}</code></pre>
+    </CopyCode>
+  );
+}`}
+              </code>
+            </pre>
+          </div>
+        </CopyCode>
       </section>
       
       <footer style={{ 

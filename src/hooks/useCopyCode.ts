@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, RefObject } from 'react';
+import { useEffect, RefObject, ReactNode } from 'react';
 import { CopyCodeOptions } from '../types/CopyCodeOptions';
 import { CopyIcon } from '../icons/CopyIcon';
 import { CheckIcon } from '../icons/CheckIcon';
+import { createRoot } from 'react-dom/client';
 
 // Position classes mapping with standalone CSS (no Tailwind)
 const positionClasses = {
@@ -26,6 +27,8 @@ export const useCopyCode = (
     buttonClassName = 'copy-code-react-button',
     successClassName = 'copy-code-react-success',
     highlightOnCopy = false,
+    customCopyIcon,
+    customSuccessIcon,
   } = options;
 
   // Skip execution during SSR
@@ -35,7 +38,6 @@ export const useCopyCode = (
   }
 
   useEffect(() => {
-
     // Use document as root element if no ref is provided
     const rootElement = ref?.current || document;
 
@@ -130,8 +132,9 @@ export const useCopyCode = (
     // Find all code blocks within the root element
     const codeBlocks = rootElement.querySelectorAll(selector);
 
-    // Array to keep track of buttons for cleanup
+    // Array to keep track of buttons and roots for cleanup
     const cleanupFunctions: (() => void)[] = [];
+    const rootsToCleanup: Array<{ root: ReturnType<typeof createRoot>, element: HTMLElement }> = [];
 
     // Add copy button to each code block
     codeBlocks.forEach((codeBlock) => {
@@ -152,7 +155,19 @@ export const useCopyCode = (
       const copyButton = document.createElement('button');
       copyButton.className = `${buttonClassName} copy-code-react-button-element`;
       copyButton.setAttribute('aria-label', 'Copy code');
-      copyButton.innerHTML = CopyIcon;
+      
+      // Create a container for React elements
+      const iconContainer = document.createElement('div');
+      copyButton.appendChild(iconContainer);
+      
+      // Render custom copy icon or default icon
+      if (customCopyIcon) {
+        const root = createRoot(iconContainer);
+        root.render(customCopyIcon);
+        rootsToCleanup.push({ root, element: iconContainer });
+      } else {
+        iconContainer.innerHTML = CopyIcon;
+      }
 
       // Click handler to copy code
       const clickHandler = (e: Event) => {
@@ -170,22 +185,82 @@ export const useCopyCode = (
             }, 400);
           }
 
-          // Change button to show success with green check icon
-          copyButton.innerHTML = `<div class="${successClassName} copy-code-react-flex copy-code-react-fade-in">
-              ${copyMessage ? `<div>${copyMessage}</div>` : ''}
-              ${CheckIcon}
-            </div>`;
+          // Clear the icon container
+          while (iconContainer.firstChild) {
+            iconContainer.removeChild(iconContainer.firstChild);
+          }
+          
+          // Create success container
+          const successContainer = document.createElement('div');
+          successContainer.className = `${successClassName} copy-code-react-flex copy-code-react-fade-in`;
+          
+          // Add copy message if provided
+          if (copyMessage) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = copyMessage;
+            successContainer.appendChild(messageDiv);
+          }
+          
+          // Add success icon (custom or default)
+          const successIconContainer = document.createElement('div');
+          successContainer.appendChild(successIconContainer);
+          
+          if (customSuccessIcon) {
+            const successRoot = createRoot(successIconContainer);
+            successRoot.render(customSuccessIcon);
+            rootsToCleanup.push({ root: successRoot, element: successIconContainer });
+          } else {
+            successIconContainer.innerHTML = CheckIcon;
+          }
+          
+          // Replace the icon container with success container
+          iconContainer.appendChild(successContainer);
 
           // Reset button after the timeout
           setTimeout(() => {
-            copyButton.innerHTML = CopyIcon;
+            // Clean up the success container
+            while (iconContainer.firstChild) {
+              iconContainer.removeChild(iconContainer.firstChild);
+            }
+            
+            // Restore the original copy icon
+            if (customCopyIcon) {
+              const newRoot = createRoot(iconContainer);
+              newRoot.render(customCopyIcon);
+              rootsToCleanup.push({ root: newRoot, element: iconContainer });
+            } else {
+              iconContainer.innerHTML = CopyIcon;
+            }
           }, copyMessageTimeout);
         }).catch(error => {
           console.error('Failed to copy code:', error);
-          copyButton.innerHTML = `<div class="copy-code-react-fade-in" style="color: #ef4444;">Failed to copy!</div>`;
+          
+          // Clear the icon container
+          while (iconContainer.firstChild) {
+            iconContainer.removeChild(iconContainer.firstChild);
+          }
+          
+          // Show error message
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'copy-code-react-fade-in';
+          errorDiv.style.color = '#ef4444';
+          errorDiv.textContent = 'Failed to copy!';
+          iconContainer.appendChild(errorDiv);
           
           setTimeout(() => {
-            copyButton.innerHTML = CopyIcon;
+            // Clean up the error message
+            while (iconContainer.firstChild) {
+              iconContainer.removeChild(iconContainer.firstChild);
+            }
+            
+            // Restore the original copy icon
+            if (customCopyIcon) {
+              const newRoot = createRoot(iconContainer);
+              newRoot.render(customCopyIcon);
+              rootsToCleanup.push({ root: newRoot, element: iconContainer });
+            } else {
+              iconContainer.innerHTML = CopyIcon;
+            }
           }, copyMessageTimeout);
         });
       };
@@ -202,8 +277,15 @@ export const useCopyCode = (
 
     // Cleanup function
     return () => {
+      // Clean up event listeners
       cleanupFunctions.forEach(cleanup => cleanup());
-      // Only remove styles if this is the last instance using the hook
+      
+      // Clean up React roots
+      rootsToCleanup.forEach(({ root }) => {
+        root.unmount();
+      });
+      
+      // Remove button containers
       codeBlocks.forEach(codeBlock => {
         const parentPre = codeBlock.parentElement;
         if (parentPre) {
@@ -223,6 +305,8 @@ export const useCopyCode = (
     containerClassName,
     successClassName,
     highlightOnCopy,
+    customCopyIcon,
+    customSuccessIcon,
     ref
   ]);
 }; 
