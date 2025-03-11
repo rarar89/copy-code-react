@@ -1,6 +1,6 @@
 # Copy Code React
 
-A lightweight React library that automatically adds copy buttons to code blocks. Customizable options for button position, styling, text and highlighting.
+A lightweight React library that automatically adds copy buttons to code blocks to copy code to the clipboard. Customizable options for button position, icons, styling, text and highlighting.
 
 <p align="center">
   <img src="https://github.com/rarar89/copy-code-react/blob/main/images/copy-code-block.gif?raw=true" alt="Copy Code Demo" style="max-width:300px" />
@@ -167,6 +167,8 @@ Both the CopyCode component and useCodeCopy hook accept the following options:
 | buttonClassName | string | 'react-code-copy-button' | Class name for the copy button |
 | successClassName | string | 'react-code-copy-success' | Class name for success message |
 | highlightOnCopy | boolean | false | Whether to highlight the code block when copied |
+| customCopyIcon | ReactNode | undefined | Custom JSX element to use instead of the default copy icon |
+| customSuccessIcon | ReactNode | undefined | Custom JSX element to use instead of the default success icon |
 
 ## Development
 
