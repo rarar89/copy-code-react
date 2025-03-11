@@ -45,13 +45,19 @@ function MyComponent() {
     <CopyCode>
       <div>
         <h3>Example code block:</h3>
-        <pre>
-          <code>
+        <pre><code>
+          {`function hello() {
+            console.log("Hello, world!");
+          }`}
+        </code></pre>
+        <div>
+          <h4>Example code block 2:</h4>
+          <pre><code>
             {`function hello() {
               console.log("Hello, world!");
             }`}
-          </code>
-        </pre>
+          </code></pre>
+        </div>
       </div>
     </CopyCode>
   );
