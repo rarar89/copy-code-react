@@ -15,6 +15,12 @@ A lightweight React library that automatically adds copy buttons to code blocks 
   </a>
 </p>
 
+<p align="center">
+  <a href="https://apimimic.com/blog/building-a-crud-application-with-react-and-nextjs/">
+    LIVE DEMO
+  </a>
+</p>
+
 ## Installation
 
 Install using pnpm, npm or yarn
