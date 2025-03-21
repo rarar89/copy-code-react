@@ -52,7 +52,6 @@ export const useCopyCode = (
         
         .copy-code-react-button-container {
           position: absolute;
-          z-index: 100;
           pointer-events: auto;
         }
         
